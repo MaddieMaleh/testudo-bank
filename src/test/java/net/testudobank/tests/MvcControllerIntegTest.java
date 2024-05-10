@@ -103,7 +103,8 @@ public class MvcControllerIntegTest {
     User customer1DepositFormInputs = new User();
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
-    customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT); 
+    customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // verify that there are no logs in TransactionHistory table before Deposit
     assertEquals(0, jdbcTemplate.queryForObject("SELECT COUNT(*) FROM TransactionHistory;", Integer.class));
@@ -333,7 +334,8 @@ public class MvcControllerIntegTest {
     User customer1DepositFormInputs = new User();
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
-    customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT); 
+    customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // store timestamp of when Deposit request is sent to verify timestamps in the TransactionHistory and OverdraftLogs tables later
     LocalDateTime timeWhenDepositRequestSent = MvcControllerIntegTestHelpers.fetchCurrentTimeAsLocalDateTimeNoMilliseconds();
@@ -396,7 +398,8 @@ public class MvcControllerIntegTest {
     User customer1DepositFormInputs = new User();
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
-    customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT); 
+    customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // store timestamp of when Deposit request is sent to verify timestamps in the TransactionHistory and OverdraftLogs tables later
     LocalDateTime timeWhenDepositRequestSent = MvcControllerIntegTestHelpers.fetchCurrentTimeAsLocalDateTimeNoMilliseconds();
@@ -462,6 +465,7 @@ public class MvcControllerIntegTest {
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
     customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // store timestamp of when Deposit request is sent to verify timestamps in the TransactionHistory table later
     LocalDateTime timeWhenDepositRequestSent = MvcControllerIntegTestHelpers.fetchCurrentTimeAsLocalDateTimeNoMilliseconds();
@@ -650,6 +654,7 @@ public class MvcControllerIntegTest {
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
     customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // send Deposit request to the Deposit Form's POST handler in MvcController
     controller.submitDeposit(customer1DepositFormInputs);
@@ -747,6 +752,7 @@ public class MvcControllerIntegTest {
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
     customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // store timestamp of when Deposit request is sent to verify timestamps in the TransactionHistory table later
     LocalDateTime timeWhenDepositRequestSent = MvcControllerIntegTestHelpers.fetchCurrentTimeAsLocalDateTimeNoMilliseconds();
@@ -835,6 +841,7 @@ public class MvcControllerIntegTest {
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
     customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // send request to the Deposit Form's POST handler in MvcController
     controller.submitDeposit(customer1DepositFormInputs);
@@ -923,6 +930,7 @@ public class MvcControllerIntegTest {
     customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
     customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
     customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_AMOUNT_TO_DEPOSIT);
+    customer1DepositFormInputs.setIsRecurring("One Time");
 
     // send request to the Deposit Form's POST handler in MvcController
     controller.submitDeposit(customer1DepositFormInputs);
@@ -1151,6 +1159,7 @@ public void testTransferPaysOverdraftAndDepositsRemainder() throws SQLException,
       customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
       customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
       customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_DEPOSIT_AMT_SEQUENCE[depositNum - 1]);
+      customer1DepositFormInputs.setIsRecurring("One Time");
 
       //Send request to the Deposit Form's POST handler in MvcController
       LocalDateTime timeOfDeposit = MvcControllerIntegTestHelpers.fetchCurrentTimeAsLocalDateTimeNoMilliseconds();
@@ -1216,6 +1225,7 @@ public void testTransferPaysOverdraftAndDepositsRemainder() throws SQLException,
       customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
       customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
       customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_DEPOSIT_AMT_SEQUENCE[depositNum - 1]);
+      customer1DepositFormInputs.setIsRecurring("One Time");
 
       //Send request to the Deposit Form's POST handler in MvcController
       LocalDateTime timeOfDeposit = MvcControllerIntegTestHelpers.fetchCurrentTimeAsLocalDateTimeNoMilliseconds();
@@ -1283,6 +1293,7 @@ public void testTransferPaysOverdraftAndDepositsRemainder() throws SQLException,
       customer1DepositFormInputs.setUsername(CUSTOMER1_ID);
       customer1DepositFormInputs.setPassword(CUSTOMER1_PASSWORD);
       customer1DepositFormInputs.setAmountToDeposit(CUSTOMER1_DEPOSIT_AMT_SEQUENCE[depositNum - 1]);
+      customer1DepositFormInputs.setIsRecurring("One Time");
 
       //Send request to the Deposit Form's POST handler in MvcController
       LocalDateTime timeOfDeposit = MvcControllerIntegTestHelpers.fetchCurrentTimeAsLocalDateTimeNoMilliseconds();

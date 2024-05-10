@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.config.Task;
 
 import java.util.Map;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.HashSet;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.concurrent.*; 
 
 import java.util.Optional;
 import java.util.Set;
@@ -297,6 +299,15 @@ public class MvcController {
     }
 	}
 
+  class TransactionTask implements Runnable { 
+    private User user;
+    public TransactionTask(String transactionType, int delayInDays, User user) { this.user = user; } 
+    public void run() 
+    { 
+      submitDeposit(user);
+    } 
+}
+
   /**
    * HTML POST request handler for the Deposit Form page.
    * 
@@ -332,6 +343,30 @@ public class MvcController {
     double userDepositAmt = user.getAmountToDeposit();
     if (userDepositAmt < 0) {
       return "welcome";
+    }
+
+    int numDaysBetweenTransactions = 0;
+    String frequency = user.getIsRecurring();
+
+    if (frequency.equals("Daily")) {
+      numDaysBetweenTransactions = 1;
+    }
+    else if (frequency.equals("Weekly")) {
+      numDaysBetweenTransactions = 7;
+    }
+    else if (frequency.equals("Biweekly")) {
+      numDaysBetweenTransactions = 14;
+    }
+    else if (frequency.equals("Monthly")) {
+      numDaysBetweenTransactions = 30;
+    }
+    if (numDaysBetweenTransactions > 0) {
+      ScheduledExecutorService scheduler = 
+      Executors.newSingleThreadScheduledExecutor();
+
+      user.setIsRecurring("One Time");
+      scheduler.scheduleAtFixedRate(new TransactionTask("Deposit", numDaysBetweenTransactions, user), 0, 10, TimeUnit.DAYS);
+      return "account_info";
     }
     
     //// Complete Deposit Transaction ////

@@ -14,9 +14,11 @@
       margin: 5px;
       text-align: left;
     }
+
     input[type=text], input[type=password], select {
       width: 200px;	
     }
+    
     input[type=radio] {
       display: inline-block;
       margin-left: 45px;
@@ -25,7 +27,14 @@
     input[type=checkbox] {
       display: inline-block;
       margin-right: 190px;
-    }	
+    }
+
+    datalist {
+      display: block;
+      width: 200px;
+      margin: 5px;
+      text-align: left;
+    }     
     
     button {
       padding: 10px;
@@ -44,7 +53,16 @@
 
       <form:label path="amountToDeposit">Amount to Deposit ($):</form:label>
 			<form:input path="amountToDeposit"/><br/>	
-				
+
+      <label path="isRecurring" for="isRecurring">Transaction Frequency:</label>
+
+      <select path="isRecurring" name="isRecurring" id="isRecurring">
+        <option value="One Time" selected>One Time</option>
+        <option value="Daily">Daily</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Monthly">Monthly</option>
+      </select><br/>
+
 			<form:button>Deposit</form:button>
 		</form:form>
     <a href='/'>Home</a>

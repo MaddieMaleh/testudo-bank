@@ -104,4 +104,8 @@ public class User {
   @Setter @Getter
   private double interestRate;
 
+  //// Recurring Transactions Fields ////
+
+  @Setter @Getter
+  private String isRecurring;
 }
